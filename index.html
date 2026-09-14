@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Muhtarma Universe ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #090514, #1f0d2e, #3a113d);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .phone-frame {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            width: 100%;
+            max-width: 400px;
+            height: 620px;
+            border-radius: 35px;
+            padding: 30px 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Page Styles */
+        .page {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .page.active {
+            display: flex;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        h2 {
+            font-size: 24px;
+            background: linear-gradient(to right, #ff99cc, #ffccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        p {
+            font-size: 15px;
+            color: #e2e8f0;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        /* Buttons & Navigation */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .main-btn {
+            background: linear-gradient(135deg, #ff4b91, #b5179e);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 75, 145, 0.4);
+            transition: transform 0.2s;
+        }
+        .main-btn:active {
+            transform: scale(0.96);
+        }
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        /* Progress Indicator */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 15px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: background 0.3s, width 0.3s;
+        }
+        .dot.active {
+            background: #ff4b91;
+            width: 20px;
+            border-radius: 4px;
+        }
+        /* Floating particles */
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 3s linear infinite;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        
+        <!-- PAGE 1: Welcome -->
+        <div class="page active" id="page1">
+            <div style="font-size: 50px; margin-bottom: 15px;">🌙✨</div>
+            <h2>Suno Muhtarma...</h2>
+            <p>Aapke liye ek choti si magical journey banayi hai. Aage badhne ke liye neeche click karo! 🌸</p>
+            <button class="main-btn" onclick="goToPage(2)">Aage Chalo 🚀</button>
+        </div>
+
+        <!-- PAGE 2: Secret Notes -->
+        <div class="page" id="page2">
+            <div style="font-size: 50px; margin-bottom: 15px;">💌</div>
+            <h2>Special Note</h2>
+            <p id="noteText">Aapki smile aur aapka positive attitude poore din ki vibe set kar deta hai! 💫</p>
+            <button class="main-btn" onclick="changeNoteText()">Aur Ek Baat Padho ✨</button>
+            <div class="btn-group" style="margin-top: 15px;">
+                <button class="main-btn secondary-btn" onclick="goToPage(1)">Peeche</button>
+                <button class="main-btn" onclick="goToPage(3)">Aage</button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: Cute Tasks -->
+        <div class="page" id="page3">
+            <div style="font-size: 50px; margin-bottom: 15px;">☕🤍</div>
+            <h2>Aaj Ka Task</h2>
+            <p id="taskText">Task: Ek lambi saans lo, paani piyo aur bas smile karte raho! 😊✨</p>
+            <button class="main-btn" onclick="changeTaskText()">New Task Dekho 🎯</button>
+            <div class="btn-group" style="margin-top: 15px;">
+                <button class="main-btn secondary-btn" onclick="goToPage(2)">Peeche</button>
+                <button class="main-btn" onclick="goToPage(4)">Aage</button>
+            </div>
+        </div>
+
+        <!-- PAGE 4: Final Message -->
+        <div class="page" id="page4">
+            <div style="font-size: 50px; margin-bottom: 15px;">💖👑</div>
+            <h2>The Vibe Check</h2>
+            <p>Aap bohot special ho aur yeh baat hamesha yaad rakhna! Stay happy always! 🌸✨</p>
+            <button class="main-btn" onclick="goToPage(1)">Dobara Shuru Karo 🔄</button>
+        </div>
+
+        <!-- Bottom Dot Indicator -->
+        <div class="dots">
+            <div class="dot active" id="dot1"></div>
+            <div class="dot" id="dot2"></div>
+            <div class="dot" id="dot3"></div>
+            <div class="dot" id="dot4"></div>
+        </div>
+
+    </div>
+
+    <script>
+        const notes = [
+            "Aapki smile aur aapka positive attitude poore din ki vibe set kar deta hai! 💫",
+            "Aapki baaton ka andaz sabse alag aur pyara hai. ☕🤍",
+            "Kabhi socha nahi tha ke koi itna random hokar bhi itna special ban sakta hai! 🦋"
+        ];
+
+        const tasks = [
+            "Task: Ek lambi saans lo, paani piyo aur bas smile karte raho! 😊✨",
+            "Task: Thodi der ke liye saari tension bhool kar relax karo! 🧘‍♀️",
+            "Task: Apne liye ek cup coffee ya chai order karo! 🍰☕"
+        ];
+
+        let noteIdx = 0;
+        let taskIdx = 0;
+
+        function goToPage(pageNum) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+            
+            document.getElementById('page' + pageNum).classList.add('active');
+            document.getElementById('dot' + pageNum).classList.add('active');
+            
+            spawnSparkle("✨");
+        }
+
+        function changeNoteText() {
+            noteIdx = (noteIdx + 1) % notes.length;
+            const el = document.getElementById("noteText");
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.innerText = notes[noteIdx];
+                el.style.opacity = 1;
+            }, 200);
+            spawnSparkle("💖");
+        }
+
+        function changeTaskText() {
+            taskIdx = (taskIdx + 1) % tasks.length;
+            const el = document.getElementById("taskText");
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.innerText = tasks[taskIdx];
+                el.style.opacity = 1;
+            }, 200);
+            spawnSparkle("🎯");
+        }
+
+        function spawnSparkle(symbol) {
+            const s = document.createElement("div");
+            s.classList.add("sparkle");
+            s.innerHTML = symbol;
+            s.style.left = Math.random() * window.innerWidth + "px";
+            s.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            s.style.fontSize = (Math.random() * 8 + 16) + "px";
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 3000);
+        }
+
+        document.getElementById("noteText").style.transition = "opacity 0.2s ease";
+        document.getElementById("taskText").style.transition = "opacity 0.2s ease";
+    </script>
+</body>
+</html>
